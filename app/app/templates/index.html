@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >
+    <title>Motordex</title>
+
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='radarchart.js') }}"></script> -->
+
+    <style>
+      body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 11px;
+        font-weight: 300;
+        fill: #000000;
+        text-align: center;
+        /*text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;*/
+
+        cursor: default;
+        background-color: white;
+      }
+
+      .legend {
+        font-family: 'Raleway', sans-serif;
+        fill: #ffffff;
+      }
+
+      .tooltip {
+        text-shadow: 0 1px 0 #000, 1px 0 0 #000, -1px 0 0 #000, 0 -1px 0 #000;
+        fill: #ffffff;
+      }
+
+      .image {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #tablecontainer1 {
+         height: 100%;
+         width: 100%;
+         display: table;
+       }
+       #tablecontainer2 {
+         vertical-align: middle;
+         display: table-cell;
+         height: 100%;
+       }
+       #tabledisplay {
+         margin: 0 auto;
+       }
+
+
+      input[type='text']{
+        padding: 0;
+        width:500px;
+        height: 30px;
+        position: relative;
+        left: 0;
+        outline: none;
+        border: 1px solid #cdcdcd;
+        border-color: rgba(0,0,0,.15);
+        background-color: #424242;
+        color: white;
+        font-size: 16px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        padding-left: 7px;
+        padding-right:7px;
+      }
+
+      input[type=button], input[type=submit], input[type=reset] {
+        background-color: #000000;/*A4A4A4;*/
+        border: 1px solid #ffffff;
+        color: white;
+        font-size: 16px;
+        height:30px;
+        width:70px;
+        position:relative;
+        /*padding: 10px 20px;*/
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <h1><FONT color= '#000000'>Motordex</FONT></h1>
+
+  <form method="post">
+    <input name="image_path" type="text" id="imageurl" placeholder="Enter Car Image URL" />
+    <input type="submit" id="btn" value="vroom!"/>
+  </form>
+
+  <!-- <h2><FONT color = '#000000'> Or upload an image </FONT></h2>
+
+  <form action = "http://localhost:9000/uploader" method = "POST"
+        enctype = "multipart/form-data">
+        <input type = "file" name = "file" />
+        <input type = "submit" value="vroom!"/>
+  </form> -->
+  {% if first %}
+
+  <h2><FONT color = '#000000'> The car you submitted:</FONT></h2>
+  <img class="image" src={{image_path}} height = "500" border:2px solid white; />
+
+  <h2> The top two likely models are </h2>
+  <div id='tablecontainer1'>
+     <div id='tablecontainer2'>
+       <table id='tabledisplay'>
+         <tr>
+           <td>
+             <h2><FONT color = '#000000'> <span style="color:{{first_color}}">{{first_perc}}%</span> </FONT></h2>
+             <img class = "image" src="{{url_for('static', filename='images/' + first + '.jpg')}}"
+               height = "200"/>
+           </td>
+           <td>
+             <h2><FONT color = '#000000'><span style="color:{{sec_color}}">{{sec_perc}}%</span> </FONT></h2>
+             <img class = "image" src="{{url_for('static', filename='images/' + second + '.jpg')}}"
+               height = "200"/>
+           </td>
+         </tr>
+       </table>
+     </div>
+   </div>
+   {% endif %}
+
+
+  </body>
+</html>
