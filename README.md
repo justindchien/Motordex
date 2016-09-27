@@ -1,5 +1,5 @@
 # Motordex
-You can read more about the project on [my blog post](justindchien.com/blog/motordex).
+You can read more about the project on [my blog post](https://www.justindchien.com/blog/motordex).
 
 The app folder contains the Flask application you can run on the local server (default port 9000).
 Note: Keras h5 models can be downloaded from [this Google Drive folder](https://drive.google.com/open?id=0B-LdLn5YkfNUbW9mRFRXdWRhQVU).
