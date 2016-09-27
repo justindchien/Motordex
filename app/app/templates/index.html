@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <title>Motordex</title>
 
     <!-- Google fonts -->
@@ -54,12 +59,14 @@
        #tabledisplay {
          margin: 0 auto;
        }
-
+       #first_stats{
+         margin: 0 auto;
+       }
 
       input[type='text']{
         padding: 0;
         width:500px;
-        height: 30px;
+        height: 35px;
         position: relative;
         left: 0;
         outline: none;
@@ -75,34 +82,21 @@
         padding-right:7px;
       }
 
-      input[type=button], input[type=submit], input[type=reset] {
-        background-color: #000000;/*A4A4A4;*/
-        border: 1px solid #ffffff;
-        color: white;
-        font-size: 16px;
-        height:30px;
-        width:70px;
-        position:relative;
-        /*padding: 10px 20px;*/
-        text-decoration: none;
-        margin: 4px 2px;
-        cursor: pointer;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
 
-      }
 
     </style>
 
   </head>
   <body>
 
-    <h1><FONT color= '#000000'>Motordex</FONT></h1>
+    <div class="jumbotron" style="background-image: url(static/images/v8banner.jpg); background-size: 100%;">
+      <h1> <FONT color = '#ffffff'> MotorDex</h1>
+      <p>The car identifier</p> </FONT>
+    </div>
 
   <form method="post">
     <input name="image_path" type="text" id="imageurl" placeholder="Enter Car Image URL" />
-    <input type="submit" id="btn" value="vroom!"/>
+    <input type="submit" class="btn btn-primary-md" id="btn" value="vroom!"/>
   </form>
 
   <!-- <h2><FONT color = '#000000'> Or upload an image </FONT></h2>
@@ -112,32 +106,81 @@
         <input type = "file" name = "file" />
         <input type = "submit" value="vroom!"/>
   </form> -->
+
   {% if first %}
 
-  <h2><FONT color = '#000000'> The car you submitted:</FONT></h2>
-  <img class="image" src={{image_path}} height = "500" border:2px solid white; />
+  <h3><FONT color = '#000000'> The car you submitted:</FONT></h3>
+  <img class="image" src={{image_path}} height = "400" border:2px solid white; />
 
-  <h2> The top two likely models are </h2>
+  <h3> The top two likely models are </h3>
   <div id='tablecontainer1'>
      <div id='tablecontainer2'>
        <table id='tabledisplay'>
          <tr>
            <td>
-             <h2><FONT color = '#000000'> <span style="color:{{first_color}}">{{first_perc}}%</span> </FONT></h2>
+             <h1><FONT color = '#000000'> <span style="color:{{first_color}}">{{first_perc}}%</span> </FONT></h1>
              <img class = "image" src="{{url_for('static', filename='images/' + first + '.jpg')}}"
                height = "200"/>
+
            </td>
            <td>
-             <h2><FONT color = '#000000'><span style="color:{{sec_color}}">{{sec_perc}}%</span> </FONT></h2>
+             <h1><FONT color = '#000000'><span style="color:{{sec_color}}">{{sec_perc}}%</span> </FONT></h1>
              <img class = "image" src="{{url_for('static', filename='images/' + second + '.jpg')}}"
                height = "200"/>
            </td>
+         </tr>
+         <tr>
+           <td>
+            {% if 'Series' in first %}
+            *Statistics are based off base model <br><br>
+           <table id='first_stats'>
+             <tr>
+               <td>
+                 <b><FONT size=3>
+                   Price <br>
+                   Power <br>
+                   Torque <br>
+                   0 - 60 <br>
+                   Drivetrain <br>
+                   Fuel Economy <br>
+                   Curb Weight <br>
+                   Dimensions
+
+                   {% endif %}
+                 </b>
+               </td>
+               <td><FONT size=3>
+                 {% if first == '5_Series' %}
+                 From $50,200 <br>
+                 240 to 445 hp<br>
+                 300 to 480 lb-ft <br>
+                 6.1 seconds <br>
+                 RWD <br>
+                 23/34 mpg <br>
+                 4,641 to 5,060 lbs <br>
+                 197″ L x 75″ W x 61″ H
+                 {% endif %}
+
+                 {% if first == '3_Series' %}
+                 From $33,450 <br>
+                 180 to 320 hp <br>
+                 200 to 330 lb-ft <br>
+                 4.6 to 7.4 seconds <br>
+                 RWD <br>
+                 32/42 mpg <br>
+                 3,295 to 4,010 lbs <br>
+                 183″ L x 71″ W x 56″ H
+                 {% endif %}
+               </td>
+             </tr>
+           </table>
+         </td>
          </tr>
        </table>
      </div>
    </div>
    {% endif %}
-
-
+    <br>
+    <br>
   </body>
 </html>

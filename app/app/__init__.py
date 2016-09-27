@@ -138,7 +138,7 @@ def prediction(image_path):
         }
 
         #Print top two predictions for front
-        result = (car_dict[front_predictions[0][0]], front+predictions[0][1]*100, car_dict[front_predictions[1][0]], front_predictions[1][1]*100)
+        result = (car_dict[front_predictions[0][0]], front_predictions[0][1]*100, car_dict[front_predictions[1][0]], front_predictions[1][1]*100)
         # print(car_dict[front_predictions[0][0]], front_predictions[0][1]*100)
         # print(car_dict[front_predictions[1][0]], front_predictions[1][1]*100)
 
